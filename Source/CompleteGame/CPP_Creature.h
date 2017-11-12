@@ -65,7 +65,10 @@ public:
 		TArray<ACPP_Item*> Inventory;
 
 	UPROPERTY(EditAnywhere)
-		TArray<ACPP_Item*> Equiped;
+		TArray<ACPP_Item*> Equipped;
+
+	UFUNCTION(BlueprintCallable)
+		void Death();
 
 protected:
 	// Called when the game starts or when spawned

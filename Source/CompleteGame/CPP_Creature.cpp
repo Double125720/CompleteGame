@@ -11,6 +11,10 @@ ACPP_Creature::ACPP_Creature()
 
 }
 
+void ACPP_Creature::Death()
+{
+}
+
 // Called when the game starts or when spawned
 void ACPP_Creature::BeginPlay()
 {
