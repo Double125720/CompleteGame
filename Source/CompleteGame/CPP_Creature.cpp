@@ -21,10 +21,6 @@ void ACPP_Creature::BeginPlay()
 void ACPP_Creature::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	for (int i = 0; i < 2; i++)
-	{
-		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, Inventory[i]->Name);
-	}
 }
 
 // Called to bind functionality to input

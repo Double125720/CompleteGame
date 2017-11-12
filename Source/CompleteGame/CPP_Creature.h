@@ -64,6 +64,9 @@ public:
 	UPROPERTY(EditAnywhere)
 		TArray<ACPP_Item*> Inventory;
 
+	UPROPERTY(EditAnywhere)
+		TArray<ACPP_Item*> Equiped;
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;

@@ -14,6 +14,10 @@ class COMPLETEGAME_API ACPP_Armor : public ACPP_Item
 {
 	GENERATED_BODY()
 	
+public:
+
+	UPROPERTY(EditAnywhere)
+		uint8 Slot;
 	
 	
 	
