@@ -24,8 +24,8 @@ TArray<ACPP_Creature*> ACPP_CreatureManager::GetCreatureList()
 // Called when the game starts or when spawned
 void ACPP_CreatureManager::BeginPlay()
 {
-	// !!! GetWorld()->GetLevel()->Actors !!!
 	Super::BeginPlay();
+	UGameplayStatics::GetAllActorsOfClass(GetWorld(), ACPP_Creature::StaticClass(), CreatureList);
 }
 
 // Called every frame
