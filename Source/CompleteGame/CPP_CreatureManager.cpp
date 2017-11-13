@@ -11,14 +11,24 @@ ACPP_CreatureManager::ACPP_CreatureManager()
 
 }
 
-void ACPP_CreatureManager::AddCreature(ACPP_Creature * character)
+void ACPP_CreatureManager::AddCreature(AActor* creature)
 {
-	this->CreatureList.Add(character);
+	this->CreatureList.Add(creature);
 }
 
-TArray<ACPP_Creature*> ACPP_CreatureManager::GetCreatureList()
+TArray<AActor*> ACPP_CreatureManager::GetCreatureList()
 {
-	return TArray<ACPP_Creature*>();
+	return CreatureList;
+}
+
+void ACPP_CreatureManager::SpawnCreature(int creatureType = 0, int level = 0, FVector location = FVector(0.0f, 0.0f, 0.0f))
+{
+	if (creatureType == 0)
+	{
+		FRotator rotation(0.0f, 0.0f, 0.0f);
+		FActorSpawnParameters SpawnInfo;
+		GetWorld()->SpawnActor<ACPP_Creature>(location, rotation, SpawnInfo);
+	}
 }
 
 // Called when the game starts or when spawned

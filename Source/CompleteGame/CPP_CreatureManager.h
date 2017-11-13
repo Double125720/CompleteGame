@@ -17,16 +17,16 @@ public:
 	ACPP_CreatureManager();
 
 	UFUNCTION(BlueprintCallable)
-		void AddCreature(ACPP_Creature* character);
+		void AddCreature(AActor* creature);
 
 	UFUNCTION(BlueprintCallable)
-		TArray<ACPP_Creature*> GetCreatureList();
+		TArray<AActor*> GetCreatureList();
+
+	UFUNCTION(BlueprintCallable)
+		void SpawnCreature(int creatureType, int level, FVector location);
 
 	UPROPERTY(EditAnywhere)
 		TArray<AActor*> CreatureList;
-
-	UPROPERTY(EditAnywhere)
-		FString Something;
 
 protected:
 	// Called when the game starts or when spawned
