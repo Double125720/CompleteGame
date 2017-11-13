@@ -32,6 +32,11 @@ void ACPP_CreatureManager::SpawnCreature(int creatureType = 0, int level = 0, in
 	}
 }
 
+void ACPP_CreatureManager::DeleteCreature(AActor * creature)
+{
+	CreatureList.Remove(creature);
+}
+
 // Called when the game starts or when spawned
 void ACPP_CreatureManager::BeginPlay()
 {
@@ -43,6 +48,13 @@ void ACPP_CreatureManager::BeginPlay()
 void ACPP_CreatureManager::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
+	for (int i = 0; i < CreatureList.Num(); i++)
+	{
+		if (Cast<ACPP_Creature, AActor>(CreatureList[i])->bIsDead)
+		{
+			GetWorld()->DestroyActor(CreatureList[i]);
+			DeleteCreature(CreatureList[i]);
+		}
+	}
 }
 

@@ -25,6 +25,9 @@ public:
 	UFUNCTION(BlueprintCallable)
 		void SpawnCreature(int creatureType, int level, int team, FVector location);
 
+	UFUNCTION(BlueprintCallable)
+		void DeleteCreature(AActor* creature);
+
 	UPROPERTY(EditAnywhere)
 		TArray<AActor*> CreatureList;
 

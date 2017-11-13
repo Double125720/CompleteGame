@@ -18,12 +18,14 @@ void ACPP_Creature::SetTeam(int TeamToSet)
 
 void ACPP_Creature::Death()
 {
+	bIsDead = true;
 }
 
 // Called when the game starts or when spawned
 void ACPP_Creature::BeginPlay()
 {
 	Super::BeginPlay();
+	bIsDead = false;
 }
 
 // Called every frame

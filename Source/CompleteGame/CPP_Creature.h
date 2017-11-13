@@ -70,6 +70,9 @@ public:
 	UPROPERTY(EditAnywhere)
 		uint32 Team;
 
+	UPROPERTY(EditAnywhere)
+		bool bIsDead;
+
 	UFUNCTION(BlueprintCallable)
 		void SetTeam(int TeamToSet);
 
