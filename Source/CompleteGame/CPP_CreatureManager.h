@@ -23,7 +23,7 @@ public:
 		TArray<AActor*> GetCreatureList();
 
 	UFUNCTION(BlueprintCallable)
-		void SpawnCreature(int creatureType, int level, FVector location);
+		void SpawnCreature(int creatureType, int level, int team, FVector location);
 
 	UPROPERTY(EditAnywhere)
 		TArray<AActor*> CreatureList;

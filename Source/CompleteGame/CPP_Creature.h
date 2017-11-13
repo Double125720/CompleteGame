@@ -67,6 +67,12 @@ public:
 	UPROPERTY(EditAnywhere)
 		TArray<ACPP_Item*> Equipped;
 
+	UPROPERTY(EditAnywhere)
+		uint32 Team;
+
+	UFUNCTION(BlueprintCallable)
+		void SetTeam(int TeamToSet);
+
 	UFUNCTION(BlueprintCallable)
 		void Death();
 

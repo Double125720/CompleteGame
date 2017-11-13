@@ -21,13 +21,14 @@ TArray<AActor*> ACPP_CreatureManager::GetCreatureList()
 	return CreatureList;
 }
 
-void ACPP_CreatureManager::SpawnCreature(int creatureType = 0, int level = 0, FVector location = FVector(0.0f, 0.0f, 0.0f))
+void ACPP_CreatureManager::SpawnCreature(int creatureType = 0, int level = 0, int team = 0, FVector location = FVector(0.0f, 0.0f, 0.0f))
 {
 	if (creatureType == 0)
 	{
 		FRotator rotation(0.0f, 0.0f, 0.0f);
 		FActorSpawnParameters SpawnInfo;
-		GetWorld()->SpawnActor<ACPP_Creature>(location, rotation, SpawnInfo);
+		AddCreature(GetWorld()->SpawnActor<ACPP_Creature>(location, rotation, SpawnInfo));
+		Cast<ACPP_Creature, AActor>(CreatureList.Last())->SetTeam(team);
 	}
 }
 

@@ -11,6 +11,11 @@ ACPP_Creature::ACPP_Creature()
 
 }
 
+void ACPP_Creature::SetTeam(int TeamToSet)
+{
+	this->Team = TeamToSet;
+}
+
 void ACPP_Creature::Death()
 {
 }
