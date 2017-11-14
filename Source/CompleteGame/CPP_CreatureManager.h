@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "CPP_Creature.h"
+#include "AIController.h"
 #include "CPP_CreatureManager.generated.h"
 
 UCLASS()
