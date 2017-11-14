@@ -18,6 +18,8 @@ public:
 
 	UPROPERTY(EditAnywhere)
 		uint8 Slot;
+	UPROPERTY(EditAnywhere)
+		uint32 ArmorLevel;
 	
 	
 	
