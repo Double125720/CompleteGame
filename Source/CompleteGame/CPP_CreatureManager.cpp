@@ -2,7 +2,6 @@
 
 #include "CPP_CreatureManager.h"
 
-
 // Sets default values
 ACPP_CreatureManager::ACPP_CreatureManager()
 {
@@ -52,7 +51,6 @@ void ACPP_CreatureManager::Tick(float DeltaTime)
 	{
 		if (Cast<ACPP_Creature, AActor>(CreatureList[i])->bIsDead)
 		{
-			GetWorld()->DestroyActor(CreatureList[i]);
 			DeleteCreature(CreatureList[i]);
 		}
 	}
