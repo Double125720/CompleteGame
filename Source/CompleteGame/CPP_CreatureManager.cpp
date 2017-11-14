@@ -51,6 +51,7 @@ void ACPP_CreatureManager::Tick(float DeltaTime)
 	{
 		if (Cast<ACPP_Creature, AActor>(CreatureList[i])->bIsDead)
 		{
+			GetWorld()->DestroyActor(Cast<AActor, AController>(CreatureList[i]->GetInstigatorController()));
 			DeleteCreature(CreatureList[i]);
 		}
 	}

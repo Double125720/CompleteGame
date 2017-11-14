@@ -8,6 +8,7 @@
 #include "Engine.h"
 #include <CPP_Item.h>
 #include <CPP_Weapon.h>
+#include <CPP_Armor.h>
 #include "CPP_Creature.generated.h"
 
 UCLASS()
@@ -22,11 +23,53 @@ public:
 	UPROPERTY(EditAnywhere)
 		FString Name;
 
-	UPROPERTY(EditAnywhere, Category = "HP")
-		int32 CurrentHealth;
+	UPROPERTY(EditAnywhere, Category = "HP|SummaryHP")
+		uint32 CurrentHealth;
 
-	UPROPERTY(EditAnywhere, Category = "HP")
-		int32 MaxHealth;
+	UPROPERTY(EditAnywhere, Category = "HP|SummaryHP")
+		uint32 MaxHealth;
+
+	UPROPERTY(EditAnywhere, Category = "HP|HeadHP")
+		uint32 HeadHP; // 0
+
+	UPROPERTY(EditAnywhere, Category = "HP|HeadHP")
+		uint32 MaxHeadHP;
+
+	UPROPERTY(EditAnywhere, Category = "HP|ChestHP")
+		uint32 ChestHP; // 1
+
+	UPROPERTY(EditAnywhere, Category = "HP|ChestHP")
+		uint32 MaxChestHP;
+
+	UPROPERTY(EditAnywhere, Category = "HP|LeftHandHP")
+		uint32 LeftHandHP; // 2
+
+	UPROPERTY(EditAnywhere, Category = "HP|LeftHandHP")
+		uint32 MaxLeftHandHP;
+
+	UPROPERTY(EditAnywhere, Category = "HP|RightHandHP")
+		uint32 RightHandHP; // 3
+
+	UPROPERTY(EditAnywhere, Category = "HP|RightHandHP")
+		uint32 MaxRightHandHP;
+
+	UPROPERTY(EditAnywhere, Category = "HP|TorsoHP")
+		uint32 TorsoHP; // 4
+
+	UPROPERTY(EditAnywhere, Category = "HP|TorsoHP")
+		uint32 MaxTorsoHP;
+
+	UPROPERTY(EditAnywhere, Category = "HP|LeftLegHP")
+		uint32 LeftLegHP; // 5
+
+	UPROPERTY(EditAnywhere, Category = "HP|LeftLegHP")
+		uint32 MaxLeftLegHP;
+
+	UPROPERTY(EditAnywhere, Category = "HP|RightLegHP")
+		uint32 RightLegHP; // 6
+
+	UPROPERTY(EditAnywhere, Category = "HP|RightLegHP")
+		uint32 MaxRightLegHP;
 
 	UPROPERTY(EditAnywhere, Category = "AP")
 		uint32 CurrentAP;
@@ -78,6 +121,11 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 		void Death();
+
+	UFUNCTION(BlueprintCallable)
+		void DealDamage(ACPP_Creature* Target, int Part = 0, int Damage = 1, int TypeOfDamage = 0);
+
+	void ChangeHP();
 
 protected:
 	// Called when the game starts or when spawned
