@@ -50,7 +50,7 @@ void ACPP_Creature::DealDamage(ACPP_Creature * Target, int Part, int Damage, int
 		ChangeHP();
 		break;
 	case 4:
-		Target->TorsoHP -= Damage - Cast<ACPP_Armor, ACPP_Item>(Target->Equipped[4])->ArmorLevel;
+		Target->TorsoHP -= Damage - Cast<ACPP_Armor, ACPP_Item>(Target->Equipped[1])->ArmorLevel;
 		ChangeHP();
 		break;
 	case 5:
