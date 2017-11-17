@@ -27,6 +27,8 @@ public:
 	UPROPERTY(EditAnywhere)
 	TArray<AActor*> AIControllerList;
 
+	int counter;
+
 	void SortByInitiative();
 
 protected:

@@ -8,7 +8,7 @@ ACPP_BattleManager::ACPP_BattleManager()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-
+	counter = 0;
 }
 
 void ACPP_BattleManager::SortByInitiative()
@@ -28,9 +28,6 @@ void ACPP_BattleManager::BeginPlay()
 void ACPP_BattleManager::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	for (int i = 0; i < CreatureList.Num(); i++)
-	{
 
-	}
 }
 
