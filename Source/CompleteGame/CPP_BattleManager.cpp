@@ -40,5 +40,10 @@ void ACPP_BattleManager::Tick(float DeltaTime)
 	{
 		counter++;
 	}
+
+	if (counter == AIControllerList.Num())
+	{
+		counter = 0;
+	}
 }
 
