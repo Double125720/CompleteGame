@@ -38,6 +38,10 @@ void ACPP_BattleManager::Tick(float DeltaTime)
 
 	else
 	{
+		if (!Cast<AAIController>(AIControllerList[counter])->GetBlackboardComponent()->GetValueAsBool("isWait"))
+		{
+			Cast<AAIController>(AIControllerList[counter])->GetBlackboardComponent()->SetValueAsBool("isWait", true);
+		}
 		counter++;
 	}
 
