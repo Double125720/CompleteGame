@@ -22,6 +22,8 @@ void ACPP_BattleManager::BeginPlay()
 	Super::BeginPlay();
 	UGameplayStatics::GetAllActorsOfClass(GetWorld(), ACPP_Creature::StaticClass(), CreatureList);
 	UGameplayStatics::GetAllActorsOfClass(GetWorld(), ACPP_BaseAIController::StaticClass(), AIControllerList);
+
+	Cast<AAIController>(AIControllerList[0])->GetBlackboardComponent()->SetValueAsBool("isWait", true);
 }
 
 // Called every frame
@@ -29,5 +31,14 @@ void ACPP_BattleManager::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	if (Cast<AAIController>(AIControllerList[counter])->GetBlackboardComponent()->GetValueAsBool("isWait"))
+	{
+		//DO NOTHING;
+	}
+
+	else
+	{
+		counter++;
+	}
 }
 
