@@ -76,6 +76,8 @@ void ACPP_Creature::BeginPlay()
 {
 	Super::BeginPlay();
 	bIsDead = false;
+	bIsTurnStart = false;
+	bIsTurnEnd = false;
 }
 
 // Called every frame
