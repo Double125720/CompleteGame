@@ -131,6 +131,12 @@ public:
 	UPROPERTY(EditAnywhere)
 		bool bIsTurnEnd;
 
+	UFUNCTION(BlueprintCallable)
+		bool getTurnState();
+
+	UFUNCTION(BlueprintCallable)
+		void setTurnState(bool turnState);
+
 	void ChangeHP();
 
 protected:

@@ -66,6 +66,16 @@ void ACPP_Creature::DealDamage(ACPP_Creature * Target, int Part, int Damage, int
 	}
 }
 
+bool ACPP_Creature::getTurnState()
+{
+	return bIsTurnEnd;
+}
+
+void ACPP_Creature::setTurnState(bool turnState)
+{
+	this->bIsTurnEnd = turnState;
+}
+
 void ACPP_Creature::ChangeHP()
 {
 	CurrentHealth = HeadHP + ChestHP + LeftHandHP + RightHandHP + TorsoHP + LeftLegHP + RightLegHP;
