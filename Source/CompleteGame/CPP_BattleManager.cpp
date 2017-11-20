@@ -26,6 +26,16 @@ void ACPP_BattleManager::BeginPlay()
 	//Cast<AAIController>(AIControllerList[0])->GetBlackboardComponent()->SetValueAsBool("isWait", true);
 }
 
+int ACPP_BattleManager::getCounter()
+{
+	return counter;
+}
+
+void ACPP_BattleManager::setCounter(int newCounter)
+{
+	this->counter = newCounter;
+}
+
 // Called every frame
 void ACPP_BattleManager::Tick(float DeltaTime)
 {

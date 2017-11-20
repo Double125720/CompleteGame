@@ -29,6 +29,12 @@ public:
 
 	UPROPERTY(EditAnywhere)
 		int counter;
+	
+	UFUNCTION(BlueprintCallable)
+		int getCounter();
+
+	UFUNCTION(BlueprintCallable)
+		void setCounter(int newCounter);
 
 	void SortByInitiative();
 
