@@ -25,7 +25,10 @@ public:
 		TArray<AActor*> CreatureList;
 
 	UPROPERTY(EditAnywhere)
-	TArray<AActor*> AIControllerList;
+		TArray<AActor*> AIControllerList;
+
+	UPROPERTY(EditAnywhere)
+		int counter;
 
 	void SortByInitiative();
 

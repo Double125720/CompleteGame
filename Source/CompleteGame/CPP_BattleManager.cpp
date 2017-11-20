@@ -8,7 +8,7 @@ ACPP_BattleManager::ACPP_BattleManager()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-
+	counter = 0;
 }
 
 void ACPP_BattleManager::SortByInitiative()
@@ -22,15 +22,62 @@ void ACPP_BattleManager::BeginPlay()
 	Super::BeginPlay();
 	UGameplayStatics::GetAllActorsOfClass(GetWorld(), ACPP_Creature::StaticClass(), CreatureList);
 	UGameplayStatics::GetAllActorsOfClass(GetWorld(), ACPP_BaseAIController::StaticClass(), AIControllerList);
+
+	//Cast<AAIController>(AIControllerList[0])->GetBlackboardComponent()->SetValueAsBool("isWait", true);
 }
 
 // Called every frame
 void ACPP_BattleManager::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	for (int i = 0; i < CreatureList.Num(); i++)
+	if (Cast<ACPP_Creature>(Cast<AAIController>(AIControllerList[counter])->GetPawn())->bIsUnderPlayerControl)
 	{
+		if (!Cast<ACPP_Creature>(Cast<AAIController>(AIControllerList[counter])->GetPawn())->bIsTurnStart)
+		{
+			Cast<ACPP_Creature>(Cast<AAIController>(AIControllerList[counter])->GetPawn())->bIsTurnStart = true;
+			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("Start turn of: %f"), counter));
+		}
 
+		else
+		{
+			if (Cast<ACPP_Creature>(Cast<AAIController>(AIControllerList[counter])->GetPawn())->bIsTurnEnd)
+			{
+				Cast<ACPP_Creature>(Cast<AAIController>(AIControllerList[counter])->GetPawn())->bIsTurnStart = false;
+				Cast<ACPP_Creature>(Cast<AAIController>(AIControllerList[counter])->GetPawn())->bIsTurnEnd = false;
+				GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("End turn of: %f"), counter));
+
+				if (counter + 1 != AIControllerList.Num())
+				{
+					counter++;
+				}
+
+				else
+				{
+					counter = 0;
+				}
+			}
+		}
+	}
+	else
+	{
+		if (Cast<AAIController>(AIControllerList[counter])->GetBlackboardComponent()->GetValueAsBool("isWait"))
+		{
+			//DO NOTHING;
+		}
+
+		else
+		{
+			if (!Cast<AAIController>(AIControllerList[counter])->GetBlackboardComponent()->GetValueAsBool("isWait"))
+			{
+				Cast<AAIController>(AIControllerList[counter])->GetBlackboardComponent()->SetValueAsBool("isWait", true);
+			}
+			counter++;
+		}
+
+		if (counter == AIControllerList.Num())
+		{
+			counter = 0;
+		}
 	}
 }
 

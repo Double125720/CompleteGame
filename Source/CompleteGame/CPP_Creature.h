@@ -125,6 +125,12 @@ public:
 	UFUNCTION(BlueprintCallable)
 		void DealDamage(ACPP_Creature* Target, int Part = 0, int Damage = 1, int TypeOfDamage = 0);
 
+	UPROPERTY(EditAnywhere)
+		bool bIsTurnStart;
+
+	UPROPERTY(EditAnywhere)
+		bool bIsTurnEnd;
+
 	void ChangeHP();
 
 protected:
