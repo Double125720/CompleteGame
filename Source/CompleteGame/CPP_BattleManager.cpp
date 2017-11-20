@@ -55,7 +55,7 @@ void ACPP_BattleManager::Tick(float DeltaTime)
 				Cast<ACPP_Creature>(Cast<AAIController>(AIControllerList[counter])->GetPawn())->bIsTurnStart = false;
 				Cast<ACPP_Creature>(Cast<AAIController>(AIControllerList[counter])->GetPawn())->bIsTurnEnd = false;
 				GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("End turn of: %f"), counter));
-
+				counter++;
 				if (counter == AIControllerList.Num())
 				{
 					counter = 0;
