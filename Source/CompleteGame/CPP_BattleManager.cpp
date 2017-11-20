@@ -60,11 +60,6 @@ void ACPP_BattleManager::Tick(float DeltaTime)
 				{
 					counter = 0;
 				}
-
-				else
-				{
-					counter++;
-				}
 			}
 		}
 	}
