@@ -66,14 +66,34 @@ void ACPP_Creature::DealDamage(ACPP_Creature * Target, int Part, int Damage, int
 	}
 }
 
-bool ACPP_Creature::getTurnState()
+bool ACPP_Creature::getEndTurnState()
 {
 	return bIsTurnEnd;
 }
 
-void ACPP_Creature::setTurnState(bool turnState)
+void ACPP_Creature::setEndTurnState(bool turnState)
 {
 	this->bIsTurnEnd = turnState;
+}
+
+bool ACPP_Creature::getStartTurnState()
+{
+	return bIsTurnStart;
+}
+
+void ACPP_Creature::setStartTurnState(bool turnState)
+{
+	this->bIsTurnStart = turnState;
+}
+
+bool ACPP_Creature::getIsControlledByPlayer()
+{
+	return bIsUnderPlayerControl;
+}
+
+void ACPP_Creature::setIsControlledByPlayer(bool state)
+{
+	this->bIsUnderPlayerControl = state;
 }
 
 void ACPP_Creature::setCreatureAI(AAIController * AIController)

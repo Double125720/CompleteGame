@@ -133,10 +133,22 @@ public:
 		bool bIsTurnEnd;
 
 	UFUNCTION(BlueprintCallable)
-		bool getTurnState();
+		bool getEndTurnState();
 
 	UFUNCTION(BlueprintCallable)
-		void setTurnState(bool turnState);
+		void setEndTurnState(bool turnState);
+
+	UFUNCTION(BlueprintCallable)
+		bool getStartTurnState();
+
+	UFUNCTION(BlueprintCallable)
+		void setStartTurnState(bool turnState);
+
+	UFUNCTION(BlueprintCallable)
+		bool getIsControlledByPlayer();
+
+	UFUNCTION(BlueprintCallable)
+		void setIsControlledByPlayer(bool state);
 
 	UPROPERTY(EditAnywhere)
 		AAIController* CreatureAI;
