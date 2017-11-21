@@ -46,6 +46,9 @@ public:
 	UFUNCTION(BlueprintCallable)
 		void AddToCreatureList(ACPP_Creature* Creature);
 
+	UFUNCTION(BlueprintCallable)
+		ACPP_Creature* getCurrentTurnCreature();
+
 	void SortByInitiative();
 
 protected:

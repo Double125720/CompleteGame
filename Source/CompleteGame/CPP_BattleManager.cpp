@@ -25,6 +25,11 @@ void ACPP_BattleManager::AddToCreatureList(ACPP_Creature * Creature)
 	CreatureList.Add(Creature);
 }
 
+ACPP_Creature * ACPP_BattleManager::getCurrentTurnCreature()
+{
+	return CreatureList[counter];
+}
+
 void ACPP_BattleManager::SortByInitiative()
 {
 	ACPP_Creature* temp;
