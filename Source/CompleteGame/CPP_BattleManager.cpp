@@ -22,7 +22,22 @@ TArray<ACPP_Creature*> ACPP_BattleManager::getCreatureList()
 
 void ACPP_BattleManager::SortByInitiative()
 {
+	ACPP_Creature* temp;
+	for (int i = 0; i < CreatureList.Num() - 1; i++)
+	{
+		for (int j = 0; j < CreatureList.Num() - i - 1; j++)
+		{
+			if (CreatureList[j]->Initiative > CreatureList[j + 1]->Initiative)
+			{
+				temp = CreatureList[j];
+				CreatureList[j] = CreatureList[j + 1];
+				CreatureList[j + 1] = temp;
+			}
+			else if ((CreatureList[j]->Initiative == CreatureList[j + 1]->Initiative) && CreatureList[j]->bIsUnderPlayerControl){ }
+		}
+	}
 
+	Algo::Reverse(CreatureList);
 }
 
 // Called when the game starts or when spawned
@@ -36,7 +51,7 @@ void ACPP_BattleManager::BeginPlay()
 		CreatureList.Add(Cast<ACPP_Creature>(Cast<AAIController>(AIControllerList[i])->GetPawn()));
 	}
 
-	//Cast<AAIController>(AIControllerList[0])->GetBlackboardComponent()->SetValueAsBool("isWait", true);
+	SortByInitiative();
 }
 
 int ACPP_BattleManager::getCounter()
@@ -95,5 +110,7 @@ void ACPP_BattleManager::Tick(float DeltaTime)
 			counter = 0;
 		}
 	}
+
+	SortByInitiative();
 }
 

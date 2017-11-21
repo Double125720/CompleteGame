@@ -10,6 +10,7 @@
 #include "BehaviorTree/BlackboardComponent.h"
 #include "BehaviorTree/BlackboardData.h"
 #include "BehaviorTree/Blackboard/BlackboardKeyAllTypes.h"
+#include "Algo/Reverse.h"
 #include "CPP_BattleManager.generated.h"
 
 UCLASS()
