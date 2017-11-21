@@ -43,6 +43,9 @@ public:
 	UFUNCTION(BlueprintCallable)
 		TArray<ACPP_Creature*> getCreatureList();
 
+	UFUNCTION(BlueprintCallable)
+		void AddToCreatureList(ACPP_Creature* Creature);
+
 	void SortByInitiative();
 
 protected:

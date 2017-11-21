@@ -20,6 +20,11 @@ TArray<ACPP_Creature*> ACPP_BattleManager::getCreatureList()
 	return CreatureList;
 }
 
+void ACPP_BattleManager::AddToCreatureList(ACPP_Creature * Creature)
+{
+	CreatureList.Add(Creature);
+}
+
 void ACPP_BattleManager::SortByInitiative()
 {
 	ACPP_Creature* temp;
