@@ -22,7 +22,7 @@ public:
 	ACPP_BattleManager();
 
 	UPROPERTY(EditAnywhere)
-		TArray<AActor*> CreatureList;
+		TArray<ACPP_Creature*> CreatureList;
 
 	UPROPERTY(EditAnywhere)
 		TArray<AActor*> AIControllerList;
@@ -35,6 +35,12 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 		void setCounter(int newCounter);
+
+	UFUNCTION(BlueprintCallable)
+		TArray<AActor*> getAIControllerList();
+
+	UFUNCTION(BlueprintCallable)
+		TArray<ACPP_Creature*> getCreatureList();
 
 	void SortByInitiative();
 
