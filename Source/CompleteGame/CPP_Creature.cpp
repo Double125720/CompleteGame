@@ -76,6 +76,16 @@ void ACPP_Creature::setTurnState(bool turnState)
 	this->bIsTurnEnd = turnState;
 }
 
+void ACPP_Creature::setCreatureAI(AAIController * AIController)
+{
+	this->CreatureAI = AIController;
+}
+
+AAIController * ACPP_Creature::getCreatureAI()
+{
+	return this->CreatureAI;
+}
+
 void ACPP_Creature::ChangeHP()
 {
 	CurrentHealth = HeadHP + ChestHP + LeftHandHP + RightHandHP + TorsoHP + LeftLegHP + RightLegHP;

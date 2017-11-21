@@ -10,6 +10,16 @@ ACPP_BattleManager::ACPP_BattleManager()
 	PrimaryActorTick.bCanEverTick = true;
 }
 
+TArray<AActor*> ACPP_BattleManager::getAIControllerList()
+{
+	return AIControllerList;
+}
+
+TArray<ACPP_Creature*> ACPP_BattleManager::getCreatureList()
+{
+	return CreatureList;
+}
+
 void ACPP_BattleManager::SortByInitiative()
 {
 
@@ -20,8 +30,11 @@ void ACPP_BattleManager::BeginPlay()
 {
 	Super::BeginPlay();
 	counter = 0;
-	UGameplayStatics::GetAllActorsOfClass(GetWorld(), ACPP_Creature::StaticClass(), CreatureList);
 	UGameplayStatics::GetAllActorsOfClass(GetWorld(), ACPP_BaseAIController::StaticClass(), AIControllerList);
+	for (int i = AIControllerList.Num() - 1; i >= 0; i--)
+	{
+		CreatureList.Add(Cast<ACPP_Creature>(Cast<AAIController>(AIControllerList[i])->GetPawn()));
+	}
 
 	//Cast<AAIController>(AIControllerList[0])->GetBlackboardComponent()->SetValueAsBool("isWait", true);
 }

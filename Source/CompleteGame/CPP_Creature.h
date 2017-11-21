@@ -9,6 +9,7 @@
 #include <CPP_Item.h>
 #include <CPP_Weapon.h>
 #include <CPP_Armor.h>
+#include <AIController.h>
 #include "CPP_Creature.generated.h"
 
 UCLASS()
@@ -136,6 +137,15 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 		void setTurnState(bool turnState);
+
+	UPROPERTY(EditAnywhere)
+		AAIController* CreatureAI;
+
+	UFUNCTION(BlueprintCallable)
+		void setCreatureAI(AAIController* AIController);
+
+	UFUNCTION(BlueprintCallable)
+		AAIController* getCreatureAI();
 
 	void ChangeHP();
 
