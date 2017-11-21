@@ -14,11 +14,5 @@ UCLASS()
 class COMPLETEGAME_API ACPP_BaseAIController : public AAIController
 {
 	GENERATED_BODY()
-
-public:
-
-	ACPP_BaseAIController();
-
-	virtual void BeginPlay() override;
 	
 };
