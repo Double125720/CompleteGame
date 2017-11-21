@@ -8,7 +8,6 @@ ACPP_BattleManager::ACPP_BattleManager()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-	counter = 0;
 }
 
 void ACPP_BattleManager::SortByInitiative()
@@ -20,6 +19,7 @@ void ACPP_BattleManager::SortByInitiative()
 void ACPP_BattleManager::BeginPlay()
 {
 	Super::BeginPlay();
+	counter = 0;
 	UGameplayStatics::GetAllActorsOfClass(GetWorld(), ACPP_Creature::StaticClass(), CreatureList);
 	UGameplayStatics::GetAllActorsOfClass(GetWorld(), ACPP_BaseAIController::StaticClass(), AIControllerList);
 
@@ -42,10 +42,11 @@ void ACPP_BattleManager::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 	if (Cast<ACPP_Creature>(Cast<AAIController>(AIControllerList[counter])->GetPawn())->bIsUnderPlayerControl)
 	{
+		//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("Selected %i"), counter));
 		if (!Cast<ACPP_Creature>(Cast<AAIController>(AIControllerList[counter])->GetPawn())->bIsTurnStart)
 		{
 			Cast<ACPP_Creature>(Cast<AAIController>(AIControllerList[counter])->GetPawn())->bIsTurnStart = true;
-			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("Start turn of: %f"), counter));
+			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("Start turn of: %i"), counter));
 		}
 
 		else
@@ -54,12 +55,9 @@ void ACPP_BattleManager::Tick(float DeltaTime)
 			{
 				Cast<ACPP_Creature>(Cast<AAIController>(AIControllerList[counter])->GetPawn())->bIsTurnStart = false;
 				Cast<ACPP_Creature>(Cast<AAIController>(AIControllerList[counter])->GetPawn())->bIsTurnEnd = false;
-				GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("End turn of: %f"), counter));
+				GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("End turn of: %i"), counter));
 				counter++;
-				if (counter == AIControllerList.Num())
-				{
-					counter = 0;
-				}
+				if (counter == AIControllerList.Num()) { counter = 0; }
 			}
 		}
 	}
