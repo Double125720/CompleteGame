@@ -6,7 +6,7 @@
 // Sets default values
 ACPP_BattleManager::ACPP_BattleManager()
 {
- 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
+	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 }
 
@@ -38,7 +38,7 @@ void ACPP_BattleManager::SortByInitiative()
 				CreatureList[j] = CreatureList[j + 1];
 				CreatureList[j + 1] = temp;
 			}
-			else if ((CreatureList[j]->Initiative == CreatureList[j + 1]->Initiative) && CreatureList[j]->bIsUnderPlayerControl){ }
+			else if ((CreatureList[j]->Initiative == CreatureList[j + 1]->Initiative) && CreatureList[j]->bIsUnderPlayerControl) {}
 		}
 	}
 
@@ -73,46 +73,22 @@ void ACPP_BattleManager::setCounter(int newCounter)
 void ACPP_BattleManager::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	if (Cast<ACPP_Creature>(Cast<AAIController>(AIControllerList[counter])->GetPawn())->bIsUnderPlayerControl)
+	//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("Selected %i"), counter));
+	if (!Cast<ACPP_Creature>(Cast<AAIController>(AIControllerList[counter])->GetPawn())->bIsTurnStart)
 	{
-		//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("Selected %i"), counter));
-		if (!Cast<ACPP_Creature>(Cast<AAIController>(AIControllerList[counter])->GetPawn())->bIsTurnStart)
-		{
-			Cast<ACPP_Creature>(Cast<AAIController>(AIControllerList[counter])->GetPawn())->bIsTurnStart = true;
-			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("Start turn of: %i"), counter));
-		}
-
-		else
-		{
-			if (Cast<ACPP_Creature>(Cast<AAIController>(AIControllerList[counter])->GetPawn())->bIsTurnEnd)
-			{
-				Cast<ACPP_Creature>(Cast<AAIController>(AIControllerList[counter])->GetPawn())->bIsTurnStart = false;
-				Cast<ACPP_Creature>(Cast<AAIController>(AIControllerList[counter])->GetPawn())->bIsTurnEnd = false;
-				GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("End turn of: %i"), counter));
-				counter++;
-				if (counter == AIControllerList.Num()) { counter = 0; }
-			}
-		}
+		Cast<ACPP_Creature>(Cast<AAIController>(AIControllerList[counter])->GetPawn())->bIsTurnStart = true;
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("Start turn of: %i"), counter));
 	}
+
 	else
 	{
-		if (Cast<AAIController>(AIControllerList[counter])->GetBlackboardComponent()->GetValueAsBool("isWait"))
+		if (Cast<ACPP_Creature>(Cast<AAIController>(AIControllerList[counter])->GetPawn())->bIsTurnEnd)
 		{
-			//DO NOTHING;
-		}
-
-		else
-		{
-			if (!Cast<AAIController>(AIControllerList[counter])->GetBlackboardComponent()->GetValueAsBool("isWait"))
-			{
-				Cast<AAIController>(AIControllerList[counter])->GetBlackboardComponent()->SetValueAsBool("isWait", true);
-			}
+			Cast<ACPP_Creature>(Cast<AAIController>(AIControllerList[counter])->GetPawn())->bIsTurnStart = false;
+			Cast<ACPP_Creature>(Cast<AAIController>(AIControllerList[counter])->GetPawn())->bIsTurnEnd = false;
+			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("End turn of: %i"), counter));
 			counter++;
-		}
-
-		if (counter == AIControllerList.Num())
-		{
-			counter = 0;
+			if (counter == AIControllerList.Num()) { counter = 0; }
 		}
 	}
 
