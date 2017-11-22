@@ -74,29 +74,58 @@ void ACPP_BattleManager::setCounter(int newCounter)
 	this->counter = newCounter;
 }
 
+void ACPP_BattleManager::CheckDead()
+{
+	for (int i = 0; i < CreatureList.Num() - 1; i++)
+	{
+		if (CreatureList[i]->bIsDead)
+		{
+			CreatureList.RemoveAt(i);
+		}
+	}
+}
+
 // Called every frame
 void ACPP_BattleManager::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("Selected %i"), counter));
-	if (!Cast<ACPP_Creature>(Cast<AAIController>(AIControllerList[counter])->GetPawn())->bIsTurnStart)
+	if (CreatureList.Num() > 1)
 	{
-		Cast<ACPP_Creature>(Cast<AAIController>(AIControllerList[counter])->GetPawn())->bIsTurnStart = true;
-		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("Start turn of: %i"), counter));
-	}
-
-	else
-	{
-		if (Cast<ACPP_Creature>(Cast<AAIController>(AIControllerList[counter])->GetPawn())->bIsTurnEnd)
+		//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("Selected %i"), counter));
+		if (!CreatureList[counter]->bIsTurnStart && !CreatureList[counter]->bIsDead)
 		{
-			Cast<ACPP_Creature>(Cast<AAIController>(AIControllerList[counter])->GetPawn())->bIsTurnStart = false;
-			Cast<ACPP_Creature>(Cast<AAIController>(AIControllerList[counter])->GetPawn())->bIsTurnEnd = false;
-			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("End turn of: %i"), counter));
+			CreatureList[counter]->bIsTurnStart = true;
+			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("Start turn of: %i"), counter));
+		}
+
+		else if (CreatureList[counter]->bIsDead)
+		{
+			CreatureList[counter]->bIsTurnStart = false;
+			CreatureList[counter]->bIsTurnEnd = false;
+			CreatureList.RemoveAt(counter);
 			counter++;
-			if (counter == AIControllerList.Num()) { counter = 0; }
+			if (counter == CreatureList.Num()) { counter = 0; }
+		}
+
+		else
+		{
+			if (CreatureList[counter]->bIsTurnEnd)
+			{
+				CreatureList[counter]->bIsTurnStart = false;
+				CreatureList[counter]->bIsTurnEnd = false;
+				GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("End turn of: %i"), counter));
+				counter++;
+				if (counter == CreatureList.Num()) { counter = 0; }
+			}
+		}
+		if (CreatureList.Num() > 1)
+		{
+			SortByInitiative();
 		}
 	}
-
-	SortByInitiative();
+	if (CreatureList.Num() == 1)
+	{
+		CheckDead();
+	}
 }
 
