@@ -91,7 +91,6 @@ void ACPP_BattleManager::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 	if (CreatureList.Num() > 1)
 	{
-		//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("Selected %i"), counter));
 		if (!CreatureList[counter]->bIsTurnStart && !CreatureList[counter]->bIsDead)
 		{
 			CreatureList[counter]->bIsTurnStart = true;
