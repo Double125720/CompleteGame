@@ -47,13 +47,5 @@ void ACPP_CreatureManager::BeginPlay()
 void ACPP_CreatureManager::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	for (int i = 0; i < CreatureList.Num(); i++)
-	{
-		if (Cast<ACPP_Creature, AActor>(CreatureList[i])->bIsDead)
-		{
-			GetWorld()->DestroyActor(Cast<AActor, AController>(CreatureList[i]->GetInstigatorController()));
-			DeleteCreature(CreatureList[i]);
-		}
-	}
 }
 

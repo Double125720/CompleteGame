@@ -96,6 +96,12 @@ public:
 	UPROPERTY(EditAnywhere, Category = "Characteristics")
 		uint32 Accuracy;
 
+	UPROPERTY(EditAnywhere, Category = "Characteristircs|Vision")
+		float VisionDistance;
+	
+	UPROPERTY(EditAnywhere, Category = "Characteristircs|Vision")
+		float FOV;
+
 	UPROPERTY(EditAnywhere)
 		bool bIsUnderPlayerControl;
 
