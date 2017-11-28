@@ -22,7 +22,6 @@ bool ACPP_BaseAIController::Vision()
 				FVector normalForward = this->GetPawn()->GetActorForwardVector();
 				normalForward.Normalize();
 				float angleBetween = FMath::RadiansToDegrees(FMath::Acos(FVector::DotProduct(normalDirVect, normalForward)));
-				GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("Distance between creatures: %f"), FVector::DistXY(this->GetPawn()->GetActorLocation(), vectToTarget)));
 				if (FMath::RadiansToDegrees(FMath::Acos(FVector::DotProduct(normalDirVect, normalForward))) <= Cast<ACPP_Creature>(this->GetPawn())->FOV)
 				{
 					GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("I see creature #%i"), i));
