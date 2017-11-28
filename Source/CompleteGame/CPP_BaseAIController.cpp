@@ -19,14 +19,23 @@ bool ACPP_BaseAIController::Vision()
 			{
 				FVector normalDirVect = vectToTarget;
 				normalDirVect.Normalize();
-				FVector normalForward = this->GetPawn()->GetActorForwardVector();
-				normalForward.Normalize();
-				float angleBetween = FMath::RadiansToDegrees(FMath::Acos(FVector::DotProduct(normalDirVect, normalForward)));
-				if (FMath::RadiansToDegrees(FMath::Acos(FVector::DotProduct(normalDirVect, normalForward))) <= Cast<ACPP_Creature>(this->GetPawn())->FOV)
+				float angleBetween = FMath::RadiansToDegrees(FMath::Acos(FVector::DotProduct(this->GetPawn()->GetActorForwardVector(), normalDirVect)));
+				if (FMath::RadiansToDegrees(FMath::Acos(FVector::DotProduct(this->GetPawn()->GetActorForwardVector(), normalDirVect))) <= Cast<ACPP_Creature>(this->GetPawn())->FOV)
 				{
-					GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("I see creature #%i"), i));
+					ECollisionChannel CollisionChannel = ECC_Visibility;
+					FCollisionQueryParams TraceParams(FName(TEXT("VictoreCore Trace")), true, this->GetPawn());
+					TraceParams.bTraceComplex = true;
+					FHitResult HitOut(ForceInit);
+					if (GetWorld()->LineTraceSingleByChannel(HitOut, this->GetPawn()->GetActorLocation(), creatures[i]->GetActorLocation(), CollisionChannel, TraceParams))
+					{
+						DrawDebugLine(GetWorld(), this->GetPawn()->GetActorLocation(), creatures[i]->GetActorLocation(), FColor::Red);
+						if (HitOut.GetActor() == creatures[i])
+						{
+							GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("I see the playah")));
+							return true;
+						}
+					}
 
-					return true;
 				}
 			}
 		}

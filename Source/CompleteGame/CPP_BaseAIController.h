@@ -6,6 +6,7 @@
 #include "AIController.h"
 #include "CPP_Creature.h"
 #include "CPP_CreatureManager.h"
+#include "DrawDebugHelpers.h"
 #include "CPP_BaseAIController.generated.h"
 
 /**
