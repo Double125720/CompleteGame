@@ -17,6 +17,8 @@ ACPP_Creature::ACPP_Creature()
 	MaxTorsoHP = TorsoHP;
 	MaxLeftLegHP = LeftLegHP;
 	MaxRightLegHP = RightLegHP;
+	FName ACPP_Creature::MeshName(TEXT("CreatureMesh0"));
+	creatureMeshComponent = CreateOptionalDefaultSubobject<USkeletalMeshComponent>(ACPP_Creature::MeshName);
 }
 
 void ACPP_Creature::SetTeam(int TeamToSet)
