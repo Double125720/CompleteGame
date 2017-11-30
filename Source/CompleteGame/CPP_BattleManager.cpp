@@ -53,7 +53,7 @@ void ACPP_BattleManager::BeginPlay()
 	Super::BeginPlay();
 	counter = 0;
 	UGameplayStatics::GetAllActorsOfClass(GetWorld(), ACPP_BaseAIController::StaticClass(), AIControllerList);
-	for (int i = AIControllerList.Num() - 1; i >= 0; i--)
+	for (int i = 0; i < AIControllerList.Num(); i++)
 	{
 		CreatureList.Add(Cast<ACPP_Creature>(Cast<AAIController>(AIControllerList[i])->GetPawn()));
 	}
