@@ -37,17 +37,14 @@ void ACPP_BattleManager::SortByInitiative()
 	{
 		for (int j = 0; j < CreatureList.Num() - i - 1; j++)
 		{
-			if (CreatureList[j]->Initiative > CreatureList[j + 1]->Initiative)
+			if ((CreatureList[j]->Initiative < CreatureList[j + 1]->Initiative) || ((CreatureList[j]->Initiative == CreatureList[j + 1]->Initiative) && CreatureList[j + 1]->bIsUnderPlayerControl))
 			{
 				temp = CreatureList[j];
 				CreatureList[j] = CreatureList[j + 1];
 				CreatureList[j + 1] = temp;
 			}
-			else if ((CreatureList[j]->Initiative == CreatureList[j + 1]->Initiative) && CreatureList[j]->bIsUnderPlayerControl) {}
 		}
 	}
-
-	Algo::Reverse(CreatureList);
 }
 
 // Called when the game starts or when spawned

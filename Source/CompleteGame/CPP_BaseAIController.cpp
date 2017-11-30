@@ -9,24 +9,38 @@ ACPP_BaseAIController::ACPP_BaseAIController()
 
 bool ACPP_BaseAIController::Vision()
 {
-	TArray<AActor*> creatures = creatureManager->GetCreatureList();
-	for (int i = 0; i < creatures.Num() - 1; i++)
+	if (!Cast<ACPP_Creature>(this->GetPawn())->bIsUnderPlayerControl)
 	{
-		if ((Cast<ACPP_Creature>(creatures[i])->bIsUnderPlayerControl) && (Cast<ACPP_Creature>(creatures[i])->Team == 0))
+		TArray<AActor*> creatures = creatureManager->GetCreatureList();
+		for (int i = 0; i < creatures.Num() - 1; i++)
 		{
-			FVector vectToTarget = (this->GetPawn()->GetActorLocation() - creatures[i]->GetActorLocation());
-			if (FVector::Dist(this->GetPawn()->GetActorLocation(), vectToTarget) <= Cast<ACPP_Creature>(this->GetPawn())->VisionDistance)
+			if ((Cast<ACPP_Creature>(creatures[i])->bIsUnderPlayerControl) && (Cast<ACPP_Creature>(creatures[i])->Team == 0))
 			{
-				FVector normalDirVect = vectToTarget;
-				normalDirVect.Normalize();
-				FVector normalForward = this->GetPawn()->GetActorForwardVector();
-				normalForward.Normalize();
-				float angleBetween = FMath::RadiansToDegrees(FMath::Acos(FVector::DotProduct(normalDirVect, normalForward)));
-				if (FMath::RadiansToDegrees(FMath::Acos(FVector::DotProduct(normalDirVect, normalForward))) <= Cast<ACPP_Creature>(this->GetPawn())->FOV)
+				FVector vectToTarget = (creatures[i]->GetActorLocation() - this->GetPawn()->GetActorLocation());
+				if (FVector::Dist(this->GetPawn()->GetActorLocation(), vectToTarget) <= Cast<ACPP_Creature>(this->GetPawn())->VisionDistance)
 				{
-					GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("I see creature #%i"), i));
+					FVector normalDirVect = vectToTarget;
+					normalDirVect.Normalize();
+					float angleBetween = FMath::RadiansToDegrees(FMath::Acos(FVector::DotProduct(this->GetPawn()->GetActorForwardVector(), normalDirVect)));
+					if (FMath::RadiansToDegrees(FMath::Acos(FVector::DotProduct(this->GetPawn()->GetActorForwardVector(), normalDirVect))) <= Cast<ACPP_Creature>(this->GetPawn())->FOV)
+					{
 
-					return true;
+						return true;
+						/*ECollisionChannel CollisionChannel = ECC_Visibility;
+						FCollisionQueryParams TraceParams(FName(TEXT("VictoreCore Trace")), true, this->GetPawn());
+						TraceParams.bTraceComplex = true;
+						TraceParams.AddIgnoredActor(Cast<AActor>(this->GetPawn()));
+						FHitResult HitOut(ForceInit);
+						if (GetWorld()->LineTraceSingleByChannel(HitOut, this->GetPawn()->GetActorLocation(), creatures[i]->GetActorLocation(), CollisionChannel, TraceParams))
+						{
+							if (HitOut.GetActor() == creatures[i])
+							{
+								DrawDebugLine(GetWorld(), this->GetPawn()->GetActorLocation(), creatures[i]->GetActorLocation(), FColor::Blue, true);
+								return true;
+							}
+						}*/
+
+					}
 				}
 			}
 		}
